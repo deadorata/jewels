@@ -29,7 +29,7 @@ Encrypt recursively all text files into a folder:
 Inside your code, access data from an encrypted file:
 
 ```
-import Jewels
+from jewels import Jewels
 
 jewel = Jewels('/etc/mykey')
 
