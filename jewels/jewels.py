@@ -18,8 +18,9 @@ class Jewels:
 
         key = self.key
 
-        with open(encrypted_file, 'rb') as f:
-            nonce, tag, ciphertext = [ f.read(x) for x in (16, 16, -1) ]
+        with open(encrypted_file, 'r') as f:
+            # 24 bytes instead of 16 for base64 padding
+            nonce, tag, ciphertext = [ base64.standard_b64decode(f.read(el).encode('utf-8')) for el in (24, 24, -1) ]
 
         cipher = AES.new(key, AES.MODE_EAX, nonce)
         data = cipher.decrypt_and_verify(ciphertext, tag)
@@ -34,16 +35,17 @@ class Jewels:
         cipher = AES.new(key, AES.MODE_EAX)
 
         try:
+
             with open(source_file, 'r', encoding='utf-8') as f:
                 byte_data = f.read().encode()
-                ciphertext, tag = cipher.encrypt_and_digest(byte_data)
 
-            with open(dest_file, 'wb') as f:
+            ciphertext, tag = cipher.encrypt_and_digest(byte_data)
+
+            with open(dest_file, 'w') as f:
                 for el in (cipher.nonce, tag, ciphertext):
-                    f.write(el)
+                    f.write(base64.standard_b64encode(el).decode('utf-8'))
 
         except Exception as err:
-            print(dest_file)
             print('Impossible to encrypt {0}: {1}'.format(source_file, str(err)))
 
         else:
@@ -90,7 +92,7 @@ class Jewels:
         key = base64.standard_b64encode(key).decode('utf-8')
 
         try:
-            with open(key_file, 'w+') as f:
+            with open(key_file, 'w') as f:
                 f.write(key)
                 print('Key saved in "{0}". Please put this file in a safe folder.'.format(key_file))
 

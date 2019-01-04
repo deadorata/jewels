@@ -23,7 +23,7 @@ parser_en = subparsers.add_parser('encrypt', help='Encrypt txt/json/yaml files')
 parser_en.add_argument('src', help='File to encrypt', action='store', metavar='src')
 parser_en.add_argument('key_file', help='Key filename', action='store', metavar='key-file')
 parser_en.add_argument('-r', '--recursive', help='Encrypt directories and their contents recursively', action='store_true', default=False)
-parser_en.add_argument('--dest', help='Folder where encrypted files are saved', action='store', metavar='dest', default='.')
+parser_en.add_argument('-o', '--output', help='Encrypted filename', action='store', metavar='output', default=None)
 parser_en.set_defaults(cmd='encrypt')
 
 if len(sys_argv)==1:
@@ -39,24 +39,31 @@ if args['cmd'] == 'keygen':
 
 elif args['cmd'] == 'encrypt':
 
+    recursive = args['recursive']
+    output = args['output']
+
     key_file = args['key_file']
     src = args['src']
-    dest = args['dest']
 
-    recursive = args['recursive']
+    if recursive:
+        # destination folder
+        dest = output if output else src
+
+    else:
+        # destination file
+        dest = output if output else src.split('.')[0]
+
 
     # check key_file and folders
     if not path.isfile(key_file):
         print('Error: "{0}" is not a valid filename.'.format(key_file))
         sys_exit()
+
     if (recursive==False and path.isdir(src)):
         print('Error: "{0}" is a directory, use -r option instead.'.format(src))
         sys_exit()
-    elif (recursive==False and not path.isfile(src)) or (recursive==True and not (path.isdir(src) or path.isfile(src))):
+    elif (recursive==False and not path.isfile(src)) or (recursive==True and not path.isdir(src)):
         print('Error: "{0}" is not a valid path.'.format(src))
-        sys_exit()
-    if not path.isdir(dest):
-        print('Error: "{0}" is not a valid path.'.format(dest))
         sys_exit()
 
     # init jewels
@@ -66,8 +73,6 @@ elif args['cmd'] == 'encrypt':
         jewel.encrypt_all(src, dest)
 
     elif (src.endswith(Jewels.ALLOWED_FILES)):
-        if (dest == '.'):
-            dest = src.split('.')[0]
         jewel.encrypt(src, dest)
 
 else:
