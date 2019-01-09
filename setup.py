@@ -17,6 +17,7 @@ setup(
     install_requires=[
       'pycryptodome >=3.7, <4',
     ],
+    packages=['jewels'],
     package_dir={
         'jewels': 'jewels'
     },
