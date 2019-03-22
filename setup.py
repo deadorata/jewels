@@ -7,7 +7,7 @@ with open('README.md','r') as f:
 
 setup(
     name='jewels',
-    version='1.1.1',
+    version='1.1.2',
     description='Secure file encryption and data access',
     author='andrea capitanelli',
     author_email='andrea.capitanelli@gmail.com',
@@ -33,4 +33,5 @@ setup(
     scripts=[
         'bin/jewels-cli'
     ],
+    test_suite='tests'
 )
