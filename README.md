@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/acapitanelli/jewels.svg?branch=master)](https://travis-ci.com/acapitanelli/jewels)
+[![Build Status](https://travis-ci.com/acapitanelli/jewels.svg?branch=1.1)](https://travis-ci.com/acapitanelli/jewels)
 
 ## Jewels
 
