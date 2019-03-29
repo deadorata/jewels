@@ -114,8 +114,9 @@ class TestJewels(unittest.TestCase):
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
 
-        expected = b'Encrypted "src.d/source_01.txt".\nEncrypted "src.d/source_02.txt".\n'
-        self.assertEqual(output, expected)
+        expected = [b'Encrypted "src.d/source_01.txt".',b'Encrypted "src.d/source_02.txt".']
+        for msg in expected:
+            self.assertIn(msg, output)
 
         jewel = Jewels('test.key')
         data_01 = jewel.decrypt('src.d/source_01')
@@ -133,8 +134,9 @@ class TestJewels(unittest.TestCase):
         process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
 
-        expected = b'Encrypted "src.d/source_01.txt".\nEncrypted "src.d/source_02.txt".\n'
-        self.assertEqual(output, expected)
+        expected = [b'Encrypted "src.d/source_01.txt".',b'Encrypted "src.d/source_02.txt".']
+        for msg in expected:
+            self.assertIn(msg, output)
 
         jewel = Jewels('test.key')
         data_01 = jewel.decrypt('dest.d/source_01')

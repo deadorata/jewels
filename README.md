@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/acapitanelli/jewels.svg?branch=master)](https://travis-ci.com/acapitanelli/jewels)
+
 ## Jewels
 
 A simple utility for encrypting/decrypting text files. It can be used for securely using applicative credentials.
