@@ -7,7 +7,7 @@ with open('README.md','r') as f:
 
 setup(
     name='jewels',
-    version='1.1.2',
+    version='1.1.3',
     description='Secure file encryption and data access',
     author='andrea capitanelli',
     author_email='andrea.capitanelli@gmail.com',
