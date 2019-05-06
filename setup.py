@@ -14,7 +14,7 @@ except FileNotFoundError:
 
 setup(
     name='jewels',
-    version='1.1.3',
+    version='1.1.4',
     description=short_desc,
     author='andrea capitanelli',
     author_email='andrea.capitanelli@gmail.com',
