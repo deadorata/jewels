@@ -1,2 +1,1 @@
-jewels==1.1.2
-pycryptodome==3.7.3
+pycryptodome==3.8.1
