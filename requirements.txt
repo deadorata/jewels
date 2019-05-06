@@ -1,1 +1,2 @@
 pycryptodome==3.8.1
+jewels=1.1.4
